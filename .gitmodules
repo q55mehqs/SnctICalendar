@@ -1,0 +1,3 @@
+[submodule "SnctSchedules"]
+	path = SnctSchedules
+	url = https://github.com/q55mehqs/SnctSchedules.git
