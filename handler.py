@@ -51,18 +51,18 @@ class CalendarManager:
         )
 
     def make_summary(self, schedule: Dict[str, str]) -> str:
-        text = []
+        summary_data = []
         if schedule['全学年予定']:
-            text.append(schedule['全学年予定'])
+            summary_data.append(schedule['全学年予定'])
 
         column = grade_columns[self.grade]
         if column is None:
-            return text[0]
+            return summary_data[0]
 
         if schedule[column]:
-            text.append(f'({self.grade_text}) {schedule[column]}')
+            summary_data.append(f'({self.grade_text}) {schedule[column]}')
 
-        return ', '.join(text)
+        return ', '.join(summary_data)
 
     def get_cal(self):
         return self.text + "END:VCALENDAR"
