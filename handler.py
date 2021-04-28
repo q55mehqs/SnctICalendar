@@ -1,6 +1,6 @@
 import csv
 from datetime import date, datetime, timedelta
-from typing import Any, Dict, Union, OrderedDict
+from typing import Any, Dict, Union
 
 grade_columns = {
     0: None,
@@ -69,13 +69,13 @@ class CalendarManager:
 
 def now_year():
     today = date.today()
-    return today.year if today.month < 4 else today.year - 1
+    return today.year if today.month <= 4 else today.year - 1
 
 def handler(event: Dict[str, Any], context):
     grade = event['grade'] if 'grade' in event else 0 # type: int
     manager = CalendarManager(grade)
 
-    with open(f'SnctSchedules/{now_year}.csv', 'r', encoding='utf-8', newline="") as f:
+    with open(f'SnctSchedules/{now_year()}.csv', 'r', encoding='utf-8', newline="") as f:
         ds = csv.DictReader(f)
 
         for d in ds:
