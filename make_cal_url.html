@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>仙台高専 年間行事予定icalの作成</title>
+  <link rel="manifest" href="./manifest.json">
+</head>
+
+<body>
+  <h1>年間行事予定 URL作成用ページ</h1>
+  <form method="GET" action="">
+    <p>年度:
+      <select name="year" id="form_year">
+        <option value="2021">2021</option>
+      </select>
+    </p>
+    <p>学年:
+      <select name="grade" id="form_grade">
+        <option value="0">全学年</option>
+        <option value="1">1年</option>
+        <option value="2">2年</option>
+        <option value="3">3年</option>
+        <option value="4">4年</option>
+        <option value="5">5年</option>
+        <option value="6">専攻科1年</option>
+        <option value="7">専攻科2年</option>
+      </select>
+    </p>
+
+    <p>
+      <button type="button" onclick="onButtonClicked()">URLの表示</button>
+      <input name="result_url" id="result_url" placeholder="左のボタンをタップしてください" disabled>
+      <button type="button" id="copy" disabled>コピー</button>
+    </p>
+  </form>
+
+  <p>Googleカレンダーに情報を読み込む方法を知りたい方は、<a href="https://support.google.com/a/users/answer/37118?hl=ja&co=GENIE.Platform%3DDesktop#zippy=">こちら</a>にアクセスしてください。
+  </p>
+
+
+  <script>
+    function onButtonClicked() {
+      let year = document.getElementById('form_year').value;
+      let grade = document.getElementById('form_grade').value;
+
+      document.getElementById('result_url').value =
+        'https://8wfs38nzi2.execute-api.us-east-2.amazonaws.com/prod/snctCalendar?year=' + year + '&grade=' + grade;
+
+      document.getElementById('result_url').disabled = false;
+      document.getElementById('copy').disabled = false;
+    }
+
+    function copyUrl() {
+      let copyText = document.getElementById('result_url').value;
+
+      navigator.clipboard.writeText(copyText).then(e => {
+        alert('コピー成功');
+      });
+    }
+
+    document.getElementById('copy').addEventListener('click', copyUrl);
+  </script>
+</body>
+
+</html>
